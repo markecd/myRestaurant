@@ -28,6 +28,8 @@ public class Izdelek {
         this.cena = cena;
     }
     private double cena;
+
+    @Enumerated(EnumType.STRING)
     private TIP_IZDELKA tip_izdelka;
 
     public TIP_IZDELKA getTip_izdelka() {

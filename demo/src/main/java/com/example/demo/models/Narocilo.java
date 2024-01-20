@@ -31,23 +31,11 @@ public class Narocilo {
         this.cas_rezervacije = cas_rezervacije;
     }
 
-    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
-    @JoinTable(
-        name = "izdelek_narocilo",
-        joinColumns = @JoinColumn(name = "narocilo_id"),
-        inverseJoinColumns = @JoinColumn(name = "izdelek_id")
-    )
-    private List<Izdelek> izdelki = new ArrayList<>();
+    @OneToMany(mappedBy = "narocilo")
+    @JsonIgnore
+    private List<IzdelekNarocilo> izdelekNarocilos = new ArrayList<>();
 
-    public List<Izdelek> getIzdelki() {
-        return izdelki;
-    }
-
-    public void setIzdelki(List<Izdelek> izdelki) {
-        this.izdelki = izdelki;
-    }
-
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_miza")
 	@JsonIgnore
 	private Miza miza;
@@ -70,5 +58,13 @@ public class Narocilo {
 
     @Enumerated(EnumType.STRING)
     private STANJE_NAROCILO stanje_narocila;
+
+    public List<IzdelekNarocilo> getIzdelekNarocilos() {
+        return izdelekNarocilos;
+    }
+
+    public void setIzdelekNarocilos(List<IzdelekNarocilo> izdelekNarocilos) {
+        this.izdelekNarocilos = izdelekNarocilos;
+    }
 
 }
