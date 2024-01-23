@@ -1,5 +1,7 @@
 package com.example.demo.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,7 @@ import com.example.demo.dao.IzdelekRepository;
 import com.example.demo.dao.MizaRepository;
 import com.example.demo.models.Miza;
 import com.example.demo.models.Narocilo;
+import com.example.demo.models.STANJE_NAROCILO;
 import com.example.demo.models.Izdelek;
 import com.example.demo.models.IzdelekNarocilo;
 import com.example.demo.dto.NarociloDTO;
@@ -55,6 +58,20 @@ public class NarociloService {
         
 
         return narocilo;
+    }
+
+    public Narocilo posodobiStanjeNarocila(STANJE_NAROCILO stanje_narocila, Long id){
+
+        Optional<Narocilo> narocilo = narociloRepository.findById(id);
+
+        if (!narocilo.isPresent()) {
+            throw new IllegalArgumentException("Narocilo z ID " + id + " ne obstaja.");
+        }
+
+        Narocilo narociloZaUpdate = narocilo.get();
+        narociloZaUpdate.setStanje_narocila(stanje_narocila);
+
+        return narociloRepository.save(narociloZaUpdate);
     }
 
 }

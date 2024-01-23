@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +52,9 @@ public class RacunService {
         racun.setKoncen_znesek(narociloRepository.VrniSkupnoCenoNarocila(racunDTO.getNarociloId()));
 
         return racunRepository.save(racun);
+    }
+
+    public Iterable<Racun> vrniRacunePogoji(double koncen_znesek, int miza_id, LocalDateTime cas_rezervacije){
+        return racunRepository.vrniRacunePogoji(koncen_znesek, miza_id, cas_rezervacije);
     }
 }

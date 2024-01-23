@@ -22,6 +22,11 @@ public class IzdelekController {
         return izdelekService.vrniVseIzdelke();
     }
 
+    @GetMapping("/vrniIzdelkeRacuna/{idRacun}")
+    public Iterable<Object[]> vrniIzdelkeRacuna(@PathVariable(name = "idRacun") Long idRacun){
+        return izdelekService.vrniIzdelkeRacuna(idRacun);
+    }
+
     @PostMapping("/vstaviIzdelek")
     public Izdelek vstaviIzdelek(@RequestBody Izdelek izdelek){
         return izdelekService.vstaviIzdelek(izdelek);

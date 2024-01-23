@@ -46,4 +46,8 @@ public class IzdelekService {
         izdelekRepository.deleteById(id);
     }
 
+    public Iterable<Object[]> vrniIzdelkeRacuna(Long idRacun){
+        return izdelekRepository.vrniIzdelkeRacuna(idRacun);
+    }
+
 }
