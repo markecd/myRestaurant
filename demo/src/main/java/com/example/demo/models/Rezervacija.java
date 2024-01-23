@@ -27,6 +27,16 @@ public class Rezervacija {
         this.cas_rezervacije = cas_rezervacije;
     }
 
+    private String ime_priimek;
+
+    public String getIme_priimek() {
+        return ime_priimek;
+    }
+
+    public void setIme_priimek(String ime_priimek) {
+        this.ime_priimek = ime_priimek;
+    }
+
     private LocalDateTime cas_rezervacije;
 
     @ManyToOne(fetch = FetchType.LAZY)
