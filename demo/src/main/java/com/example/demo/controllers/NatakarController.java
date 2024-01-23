@@ -21,7 +21,7 @@ public class NatakarController {
     }
 
     @PostMapping("/vstaviNatakarja")
-    public Natakar vstaviMizo(@RequestBody Natakar natakar){
+    public Natakar vstaviNatakarja(@RequestBody Natakar natakar){
         return natakarService.vstaviNatakarja(natakar);
     }
 }
