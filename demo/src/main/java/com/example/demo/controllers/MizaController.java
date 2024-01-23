@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Miza;
+import com.example.demo.models.STANJE_MIZE;
 import com.example.demo.services.MizaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,8 @@ public class MizaController {
         return mizaService.vrniProsteMizePoSteviluSedezev(stevilo_sedezev);
     }
 
+    @GetMapping("/vrniSpecificnoMizo/{stanjeMize}/{stMize}/{stSedezev}")
+    public Iterable<Miza> vrniSpecificnoMizo(@PathVariable STANJE_MIZE stanjeMize, @PathVariable int stMize, @PathVariable int stSedezev) {
+        return mizaService.vrniSpecificnoMizo(stanjeMize, stMize, stSedezev);
+    }
 }

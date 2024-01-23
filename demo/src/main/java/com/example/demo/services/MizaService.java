@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.MizaRepository;
 import com.example.demo.models.Miza;
+import com.example.demo.models.STANJE_MIZE;
 
 @Service
 public class MizaService {
@@ -24,4 +25,7 @@ public class MizaService {
         return mizaRepository.save(miza);
     }
 
+    public Iterable<Miza> vrniSpecificnoMizo(STANJE_MIZE stanjeMize, int stMize, int stSedezev) {
+        return mizaRepository.vrniSpecificnoMizo(stanjeMize, stMize, stSedezev);
+    }
 }

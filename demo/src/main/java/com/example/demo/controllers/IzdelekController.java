@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Izdelek;
+import com.example.demo.models.TIP_IZDELKA;
 import com.example.demo.services.IzdelekService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,12 @@ public class IzdelekController {
     public void deleteIzdelek(@PathVariable Long id){
         izdelekService.deleteIzdelek(id);
     }
+
+     @GetMapping("/vrniSpecificenIzdelek/{tipIzdelka}/{cena}")
+     public Iterable<Izdelek> vrniSpecificenIzdelek(@PathVariable TIP_IZDELKA tipIzdelka, @PathVariable double cena) {
+        return izdelekService.vrniSpecificenIzdelek(tipIzdelka,cena);
+    }
+
 
 
 }

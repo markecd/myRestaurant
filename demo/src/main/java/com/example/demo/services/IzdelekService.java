@@ -1,6 +1,8 @@
 package com.example.demo.services;
 
 import com.example.demo.models.Izdelek;
+import com.example.demo.models.Miza;
+import com.example.demo.models.TIP_IZDELKA;
 import com.example.demo.dao.IzdelekRepository;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
@@ -48,6 +50,10 @@ public class IzdelekService {
 
     public Iterable<Object[]> vrniIzdelkeRacuna(Long idRacun){
         return izdelekRepository.vrniIzdelkeRacuna(idRacun);
+        }
+        
+    public Iterable<Izdelek> vrniSpecificenIzdelek(TIP_IZDELKA tipIzdelka, double cena) {
+        return izdelekRepository.vrniSpecificenIzdelek(tipIzdelka, cena);
     }
 
 }
