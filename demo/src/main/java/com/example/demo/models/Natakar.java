@@ -46,4 +46,13 @@ public class Natakar {
     }
     private String geslo;
 
+    @Enumerated(EnumType.STRING)
+    private TIP_ZAPOSLENEGA pozicija;
+
+    public TIP_ZAPOSLENEGA getPozicija() {
+        return pozicija;
+    }
+    public void setPozicija(TIP_ZAPOSLENEGA pozicija) {
+        this.pozicija = pozicija;
+    }
 }

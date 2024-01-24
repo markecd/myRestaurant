@@ -32,4 +32,5 @@ public class MizaController {
     public Iterable<Miza> vrniSpecificnoMizo(@PathVariable STANJE_MIZE stanjeMize, @PathVariable int stMize, @PathVariable int stSedezev) {
         return mizaService.vrniSpecificnoMizo(stanjeMize, stMize, stSedezev);
     }
+
 }

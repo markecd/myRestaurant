@@ -4,7 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.NatakarRepository;
+import com.example.demo.dto.NatakarDTO;
+import com.example.demo.dto.prijavaDTO;
 import com.example.demo.models.Natakar;
+import com.example.demo.security.JwtUtil;
+
+import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -28,4 +33,25 @@ public class NatakarService {
 
         return natakarRepository.save(natakar);
     }
+
+    public prijavaDTO overjanjeNatakar(NatakarDTO natakarDTO){
+
+        String username = natakarDTO.getUsername();
+        String geslo = natakarDTO.getGeslo();
+        
+        Optional<Natakar> optionalNatakar = natakarRepository.vrniNatakarPoUsername(username);
+
+        if(optionalNatakar.isPresent()){
+            Natakar natakar = optionalNatakar.get();
+            String shranjenoGeslo = natakar.getGeslo();
+
+            
+            String zeton = JwtUtil.ustvariZeton(natakar.getPozicija().toString());
+
+            return new prijavaDTO(BCrypt.checkpw(geslo, shranjenoGeslo), zeton, natakar.getId());
+        }
+
+        return new prijavaDTO(false, null, null);
+    }
+
 }
