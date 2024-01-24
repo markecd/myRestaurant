@@ -1,0 +1,42 @@
+/* Narocilo.css */
+.narocilo-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 25px;
+    margin-left: 400px;
+    margin-right: 400px;
+    margin-bottom: 25px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+  
+  .nazaj-button {
+    height: 40px;
+    font-size: 16px;
+    background-color: #ff6347; 
+    border: 1px solid #ff6347;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .nazaj-button:hover {
+    background-color: #d84315; 
+    border: 1px solid #d84315;
+  }
+  
+  .narocilo-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .narocilo-title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+
+  

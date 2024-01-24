@@ -1,0 +1,45 @@
+/* Header.css */
+.header-container {
+    background-color: #343a40; /* Dark background color */
+    color: #fff; /* Text color */
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .logo a {
+    text-decoration: none;
+    color: #fff; /* Text color for the logo link */
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 20px; /* Adjust the gap between links */
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #fff; /* Text color for navigation links */
+  }
+  
+  .nav-links a:hover {
+    text-decoration:underline;
+  }
+  
+  .logout-button {
+    height: 40px;
+    font-size: 16px;
+    background-color: #ff6347; /* Tomato Red */
+    border: 1px solid #ff6347;
+    color: #fff;
+    margin-left: 20px; /* Add margin to separate the logout button from the links */
+  }
+  
+  .logout-button:hover {
+    background-color: #c82333;
+  }
+
+  
+  

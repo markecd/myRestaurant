@@ -1,0 +1,23 @@
+.miza-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 50px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+
+.miza-button {
+    height: 40px;
+    font-size: 16px;
+    background-color: #ff6347;
+    border: 1px solid #ff6347;
+    color: #fff;
+  }
+  
+.miza-button:hover {
+    background-color: #d84315; 
+    border: 1px solid #d84315;
+  }
+  
