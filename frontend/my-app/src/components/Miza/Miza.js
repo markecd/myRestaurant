@@ -12,23 +12,32 @@ function Miza({ data }) {
     history.push(`/narocilo/${data[0]}`);
   };
 
-  const handlePostregelClick = (id) => {
+  const handlePostregelClick = async (id) => {
     const novoStanje = stanjeMize === 'ZASEDENO_NEPOSTREZENO' ? 'ZASEDENO_POSTREZENO' : 'ZASEDENO_NEPOSTREZENO';
     setStanjeMize(novoStanje);
 
-    fetch(`http://localhost:8080/api/v1/mize/posodobiStanje/${id}/${novoStanje}`, { 
+    const response1 = await fetch(`http://localhost:8080/api/v1/mize/posodobiStanje/${id}/${novoStanje}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       }
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log("Response from backend:", data);
-      })
-      .catch(error => {
-        console.error("Error while sending narocilo:", error);
-      });
+    });
+    const data1 = await response1.json();
+    console.log(data1);
+
+    const response2 = await fetch(`http://localhost:8080/api/v1/narocila/dobiZadnjeNarociloByMiza/${id}`);
+    const idNarocilo = await response2.json();
+    console.log(idNarocilo);
+
+    const response3 = await fetch(`http://localhost:8080/api/v1/narocila/spremeniStanje/POSTREZENO/${idNarocilo}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    const data3 = await response3.json();
+    console.log(data3);
+    
   }
 
   let mizaBorder = data[4] === 'PRIPRAVLJENO' ? {
@@ -38,23 +47,23 @@ function Miza({ data }) {
     border: '2px solid yellow',
     boxShadow: '0px 0px 10px yellow'
   } : {};
-  
+
 
   let stanjeMizeClass;
   let stanjeMizeNapis;
 
-  switch(stanjeMize){
-    case('NEZASEDENO'):
+  switch (stanjeMize) {
+    case ('NEZASEDENO'):
       stanjeMizeNapis = 'NEZASEDENO';
       mizaBorder = {
         border: '1px solid #ddd'
       }
       break;
-    case('ZASEDENO_NEPOSTREZENO'):
+    case ('ZASEDENO_NEPOSTREZENO'):
       stanjeMizeNapis = 'NEPOSTREŽENO';
       stanjeMizeClass = 'stanje-mize-rdeca'
       break;
-    case('ZASEDENO_POSTREZENO'):
+    case ('ZASEDENO_POSTREZENO'):
       stanjeMizeNapis = 'POSTREŽENO';
       stanjeMizeClass = 'stanje-mize-zelena';
       mizaBorder = {
@@ -69,7 +78,7 @@ function Miza({ data }) {
         <h3>Miza {data[2]}</h3>
         <h5 className={stanjeMizeClass}>{stanjeMizeNapis}</h5>
         <div className='col-lg-12'>
-          {stanjeMize  === 'ZASEDENO_NEPOSTREZENO' ? (<div>
+          {stanjeMize === 'ZASEDENO_NEPOSTREZENO' ? (<div>
             <Button
               variant="primary"
               type="button"

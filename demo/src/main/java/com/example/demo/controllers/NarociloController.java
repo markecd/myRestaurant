@@ -50,4 +50,9 @@ public class NarociloController {
         return narociloService.najdiStanjeMizeNaStanjeNarocila();
     }
 
+    @GetMapping("/dobiZadnjeNarociloByMiza/{idMiza}")
+    public Long dobiZadnjeNarociloByMiza(@PathVariable(name="idMiza") Long idMiza){
+        return narociloService.dobiZadnjeNarociloByMiza(idMiza);
+    }
+
 }

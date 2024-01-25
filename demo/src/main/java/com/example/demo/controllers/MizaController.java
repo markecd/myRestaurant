@@ -28,11 +28,6 @@ public class MizaController {
         return mizaService.vrniVseMize();
     }
 
-    @PutMapping("/posodobiMizo/{id}")
-    public Miza posodobiMizo(@PathVariable Long id, @RequestBody Miza novaMiza) {
-        return mizaService.posodobiMizo(id, novaMiza);
-    }
-
     @PostMapping("/vstaviMizo")
     public Miza vstaviMizo(@RequestBody Miza miza){
         return mizaService.vstaviMizo(miza);
