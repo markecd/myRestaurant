@@ -1,0 +1,16 @@
+.naslov-steze {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.kanban-board{
+    height: 100vh;
+    overflow: auto;
+    margin: 0;
+}
+
+.sredina{
+    border-left: 3px solid #ddd;
+    border-right: 3px solid #ddd;
+}

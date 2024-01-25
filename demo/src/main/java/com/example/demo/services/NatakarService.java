@@ -48,9 +48,9 @@ public class NatakarService {
             String shranjenoGeslo = natakar.getGeslo();
 
             
-            String zeton = JwtUtil.ustvariZeton(natakar.getPozicija().toString());
+            String pozicija = natakar.getPozicija().toString();
 
-            return new prijavaDTO(BCrypt.checkpw(geslo, shranjenoGeslo), zeton, natakar.getId());
+            return new prijavaDTO(BCrypt.checkpw(geslo, shranjenoGeslo), pozicija, natakar.getId());
         }
 
         return new prijavaDTO(false, null, null);

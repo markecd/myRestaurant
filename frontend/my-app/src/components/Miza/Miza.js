@@ -1,35 +1,97 @@
 // Miza.js
-import React from 'react';
+import React, { useState } from 'react';
 import './Miza.css';
 import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
-function Miza() {
+function Miza({ data }) {
+  const [stanjeMize, setStanjeMize] = useState(data[1]);
   const history = useHistory();
 
   const handleNarociloClick = () => {
-    history.push('/narocilo');
+    history.push(`/narocilo/${data[0]}`);
   };
 
+  const handlePostregelClick = (id) => {
+    const novoStanje = stanjeMize === 'ZASEDENO_NEPOSTREZENO' ? 'ZASEDENO_POSTREZENO' : 'ZASEDENO_NEPOSTREZENO';
+    setStanjeMize(novoStanje);
+
+    fetch(`http://localhost:8080/api/v1/mize/posodobiStanje/${id}/${novoStanje}`, { 
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Response from backend:", data);
+      })
+      .catch(error => {
+        console.error("Error while sending narocilo:", error);
+      });
+  }
+
+  let mizaBorder = data[4] === 'PRIPRAVLJENO' ? {
+    border: '2px solid green',
+    boxShadow: '0px 0px 10px green'
+  } : data[4] === 'V_PRIPRAVI' ? {
+    border: '2px solid yellow',
+    boxShadow: '0px 0px 10px yellow'
+  } : {};
+  
+
+  let stanjeMizeClass;
+  let stanjeMizeNapis;
+
+  switch(stanjeMize){
+    case('NEZASEDENO'):
+      stanjeMizeNapis = 'NEZASEDENO';
+      mizaBorder = {
+        border: '1px solid #ddd'
+      }
+      break;
+    case('ZASEDENO_NEPOSTREZENO'):
+      stanjeMizeNapis = 'NEPOSTREŽENO';
+      stanjeMizeClass = 'stanje-mize-rdeca'
+      break;
+    case('ZASEDENO_POSTREZENO'):
+      stanjeMizeNapis = 'POSTREŽENO';
+      stanjeMizeClass = 'stanje-mize-zelena';
+      mizaBorder = {
+        border: '1px solid #ddd'
+      }
+      break;
+  }
+
   return (
-    <div className="miza-container">
+    <div className="miza-container" style={mizaBorder}>
       <div className='row'>
-        <h3>Miza 13</h3>
-        <h4>Stanje</h4>
-        <div className='col-lg-6'>
-          <Button
-            variant="primary"
-            type="button"
-            className="miza-button"
-            onClick={handleNarociloClick}
-          >
-            Naročilo
-          </Button>
-        </div>
-        <div className='col-lg-6'>
-          <Button variant="primary" type="submit" className="miza-button">
-            Račun
-          </Button>
+        <h3>Miza {data[2]}</h3>
+        <h5 className={stanjeMizeClass}>{stanjeMizeNapis}</h5>
+        <div className='col-lg-12'>
+          {stanjeMize  === 'ZASEDENO_NEPOSTREZENO' ? (<div>
+            <Button
+              variant="primary"
+              type="button"
+              className="miza-button"
+              onClick={handleNarociloClick}
+            >
+              Naročilo
+            </Button>
+            <Button
+              variant="primary"
+              type="button"
+              className="miza-button"
+              onClick={() => handlePostregelClick(data[0])}
+            >
+              Postregel
+            </Button>
+          </div>
+          ) : (
+            <Button variant="primary" type="submit" className="miza-button">
+              Račun
+            </Button>
+          )}
         </div>
       </div>
     </div>

@@ -48,6 +48,9 @@ public class IzdelekController {
         return izdelekService.vrniSpecificenIzdelek(tipIzdelka,cena);
     }
 
-
+    @GetMapping("/vrniIzdelkeOrdered")
+    public Iterable<Izdelek> vrniIzdelkeOrdByTip(){
+        return izdelekService.vrniIzdelkeOrdByTip();
+    }
 
 }

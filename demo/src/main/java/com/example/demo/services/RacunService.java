@@ -12,6 +12,7 @@ import com.example.demo.dao.RacunRepository;
 import com.example.demo.models.Natakar;
 import com.example.demo.models.Narocilo;
 import com.example.demo.models.Racun;
+import com.example.demo.models.STANJE_NAROCILO;
 import com.example.demo.dto.RacunDTO;
 
 @Service
@@ -49,8 +50,10 @@ public class RacunService {
         racun.setNarocilo(narociloZaVstaviti);
         racun.setNatakar(natakarZaVstaviti);
 
+        narociloZaVstaviti.setStanje_narocila(STANJE_NAROCILO.PLACANO);
         racun.setKoncen_znesek(narociloRepository.VrniSkupnoCenoNarocila(racunDTO.getNarociloId()));
 
+        narociloRepository.save(narociloZaVstaviti);
         return racunRepository.save(racun);
     }
 

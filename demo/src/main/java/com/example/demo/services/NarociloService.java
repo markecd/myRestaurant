@@ -39,7 +39,7 @@ public class NarociloService {
 
         Narocilo narocilo = new Narocilo();
         narocilo.setCas_rezervacije(narociloDTO.getCasRezervacije());
-        narocilo.setStanje_narocila(narociloDTO.getStanjeNarocila());
+        narocilo.setStanje_narocila(STANJE_NAROCILO.PREJETO);
 
         Miza miza = mizaRepository.findById(idMiza).orElseThrow(/* exception */);
         narocilo.setMiza(miza);
@@ -72,6 +72,10 @@ public class NarociloService {
         narociloZaUpdate.setStanje_narocila(stanje_narocila);
 
         return narociloRepository.save(narociloZaUpdate);
+    }
+
+    public Iterable<Object[]> vrniZasedeneMize(){
+        return narociloRepository.getZasedeneMize();
     }
 
 }

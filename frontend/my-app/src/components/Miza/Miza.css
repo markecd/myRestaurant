@@ -1,4 +1,6 @@
 .miza-container {
+    width: 300px; 
+    height: 175px;
     background-color: #fff;
     border: 1px solid #ddd;
     padding: 15px;
@@ -11,6 +13,7 @@
 .miza-button {
     height: 40px;
     font-size: 16px;
+    margin: 1rem;
     background-color: #ff6347;
     border: 1px solid #ff6347;
     color: #fff;
@@ -21,3 +24,10 @@
     border: 1px solid #d84315;
   }
   
+.stanje-mize-zelena {
+  color: green;
+}
+
+.stanje-mize-rdeca {
+  color: #ff6347;
+}

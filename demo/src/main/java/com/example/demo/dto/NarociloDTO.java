@@ -15,13 +15,6 @@ public class NarociloDTO {
         this.casRezervacije = casRezervacije;
     }
     private LocalDateTime casRezervacije;
-    public STANJE_NAROCILO getStanjeNarocila() {
-        return stanjeNarocila;
-    }
-    public void setStanjeNarocila(STANJE_NAROCILO stanjeNarocila) {
-        this.stanjeNarocila = stanjeNarocila;
-    }
-    private STANJE_NAROCILO stanjeNarocila;
     public List<Long> getIzdelkiIds() {
         return izdelkiIds;
     }

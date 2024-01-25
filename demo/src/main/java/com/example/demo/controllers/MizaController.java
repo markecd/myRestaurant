@@ -33,4 +33,9 @@ public class MizaController {
         return mizaService.vrniSpecificnoMizo(stanjeMize, stMize, stSedezev);
     }
 
+    @PutMapping("/posodobiStanje/{idMiza}/{stanjeMiza}")
+    public Miza posodobiStanjeMize(@PathVariable(name = "idMiza") Long idMiza, @PathVariable(name = "stanjeMiza") String stanjeMiza){
+        return mizaService.posodobiStanjeMize(idMiza, stanjeMiza);
+    }
+
 }

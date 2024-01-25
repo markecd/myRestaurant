@@ -23,4 +23,7 @@ public interface IzdelekRepository extends CrudRepository<Izdelek, Long>{
             @Param("tipIzdelka") TIP_IZDELKA tipIzdelka, 
             @Param("cena") double cena
         );
+
+    @Query("SELECT i FROM Izdelek i ORDER BY i.tip_izdelka")
+    Iterable<Izdelek> vrniIzdelkeOrdByTip();
 }

@@ -50,10 +50,13 @@ public class IzdelekService {
 
     public Iterable<Object[]> vrniIzdelkeRacuna(Long idRacun){
         return izdelekRepository.vrniIzdelkeRacuna(idRacun);
-        }
+    }
         
     public Iterable<Izdelek> vrniSpecificenIzdelek(TIP_IZDELKA tipIzdelka, double cena) {
         return izdelekRepository.vrniSpecificenIzdelek(tipIzdelka, cena);
     }
 
+    public Iterable<Izdelek> vrniIzdelkeOrdByTip(){
+        return izdelekRepository.vrniIzdelkeOrdByTip();
+    }
 }

@@ -34,8 +34,9 @@ function Login() {
     })
       .then(response => response.json())
       .then(result => {
-        console.log("prijava uspesna", result.uspesnaPrijava) //TO DO
+        console.log("prijava uspesna", result) //TO DO
         if (result.uspesnaPrijava) {
+          sessionStorage.setItem('pozicija', result.pozicija);
           setIsLoginSuccessful(true);
         }
       })

@@ -15,13 +15,27 @@
   .nazaj-button {
     height: 40px;
     font-size: 16px;
+    background-color: grey; 
+    border: 1px solid grey;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .nazaj-button:hover {
+    background-color: #313130fa; 
+    border: 1px solid #313130fa;
+  }
+
+  .naprej-button {
+    height: 40px;
+    font-size: 16px;
     background-color: #ff6347; 
     border: 1px solid #ff6347;
     color: #fff;
     margin-bottom: 20px;
   }
 
-  .nazaj-button:hover {
+  .naprej-button:hover {
     background-color: #d84315; 
     border: 1px solid #d84315;
   }

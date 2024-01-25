@@ -32,4 +32,9 @@ public class NarociloController {
 
         return narociloService.posodobiStanjeNarocila(stanje, id);
     }
+
+    @GetMapping("/vrniZasedeneMize")
+    public Iterable<Object[]> vrniZasedeneMize(){
+        return narociloService.vrniZasedeneMize();
+    }
 }

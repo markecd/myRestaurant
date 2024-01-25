@@ -22,4 +22,5 @@ public interface MizaRepository extends CrudRepository<Miza, Long> {
             @Param("stSedezev") int stSedezev
         );
 
+
 }
