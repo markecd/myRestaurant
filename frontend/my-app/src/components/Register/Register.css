@@ -1,0 +1,43 @@
+/* Login.css */
+.register-container {
+    background-color: #f5f5f5;
+    border: 1px solid #d1d1d1;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .register-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .form-group {
+    margin-bottom: 25px;
+  }
+  
+  .form-label {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .form-control {
+    height: 40px;
+    font-size: 14px;
+  }
+  
+  .register-button {
+    height: 40px;
+    font-size: 16px;
+    background-color: #ff6347; /* Tomato Red */
+    border: 1px solid #ff6347;
+    color: #fff;
+  }
+  
+  .register-button:hover {
+    background-color: #d84315; /* Darker shade for hover */
+    border: 1px solid #d84315;
+  }
+  

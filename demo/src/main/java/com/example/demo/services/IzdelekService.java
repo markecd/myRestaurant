@@ -17,8 +17,8 @@ public class IzdelekService {
     @Autowired
     public IzdelekService(IzdelekRepository izdelekRepository) {
         this.izdelekRepository = izdelekRepository;
-    }
-
+    }   
+          
     public Iterable<Izdelek> vrniVseIzdelke() {
         return izdelekRepository.vrniVseIzdelke();
     }

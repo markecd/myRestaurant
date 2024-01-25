@@ -10,6 +10,8 @@ import com.example.demo.models.Natakar;
 import com.example.demo.security.JwtUtil;
 
 import java.util.Optional;
+import java.util.function.Consumer;
+
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -52,6 +54,12 @@ public class NatakarService {
         }
 
         return new prijavaDTO(false, null, null);
+    }
+
+    public Iterable<String> vrniPozicije(){
+        Iterable<String> pozicije = natakarRepository.vrniVsePozicije();
+
+        return pozicije;
     }
 
 }
