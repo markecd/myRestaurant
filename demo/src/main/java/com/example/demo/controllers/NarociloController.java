@@ -1,10 +1,13 @@
 package com.example.demo.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.models.Narocilo;
+import com.example.demo.models.STANJE_MIZE;
 import com.example.demo.models.STANJE_NAROCILO;
 import com.example.demo.dto.NarociloDTO;
 import com.example.demo.services.NarociloService;
@@ -37,4 +40,14 @@ public class NarociloController {
     public Iterable<Object[]> vrniZasedeneMize(){
         return narociloService.vrniZasedeneMize();
     }
+    @GetMapping("/najdiMizoZNarociloId/{narociloId}")
+    public Integer NajdiMizoZNarociloId(@PathVariable Long narociloId) {
+        return narociloService.najdiMizoZNarociloId(narociloId);
+    }
+
+    @GetMapping("/najdiStanjeMizePostrezenegaNarocila")
+    public List<STANJE_MIZE> najdiStanjeMizeNaStanjeNarocila() {
+        return narociloService.najdiStanjeMizeNaStanjeNarocila();
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import com.example.demo.dao.IzdelekRepository;
 import com.example.demo.dao.MizaRepository;
 import com.example.demo.models.Miza;
 import com.example.demo.models.Narocilo;
+import com.example.demo.models.STANJE_MIZE;
 import com.example.demo.models.STANJE_NAROCILO;
 import com.example.demo.models.Izdelek;
 import com.example.demo.models.IzdelekNarocilo;
@@ -76,6 +78,14 @@ public class NarociloService {
 
     public Iterable<Object[]> vrniZasedeneMize(){
         return narociloRepository.getZasedeneMize();
+    }
+
+    public Integer najdiMizoZNarociloId(Long narociloId) {
+        return narociloRepository.najdiMizoZNarociloId(narociloId);
+    }
+
+    public List<STANJE_MIZE> najdiStanjeMizeNaStanjeNarocila() {
+        return narociloRepository.najdiStanjeMizeNaStanjeNarocila();
     }
 
 }
