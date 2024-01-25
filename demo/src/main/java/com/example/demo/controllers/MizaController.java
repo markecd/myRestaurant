@@ -18,6 +18,21 @@ public class MizaController {
         this.mizaService = mizaService;
     }
 
+    @DeleteMapping("/izbrisiMizo/{id}")
+    public void izbrisiMizo(@PathVariable Long id) {
+        mizaService.izbrisiMizo(id);
+    }
+
+    @GetMapping("/vrniVseMize")
+    public Iterable<Miza> vrniVseMize() {
+        return mizaService.vrniVseMize();
+    }
+
+    @PutMapping("/posodobiMizo/{id}")
+    public Miza posodobiMizo(@PathVariable Long id, @RequestBody Miza novaMiza) {
+        return mizaService.posodobiMizo(id, novaMiza);
+    }
+
     @PostMapping("/vstaviMizo")
     public Miza vstaviMizo(@RequestBody Miza miza){
         return mizaService.vstaviMizo(miza);
