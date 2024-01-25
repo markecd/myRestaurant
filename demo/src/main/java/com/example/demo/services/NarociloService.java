@@ -88,6 +88,9 @@ public class NarociloService {
         return narociloRepository.najdiStanjeMizeNaStanjeNarocila();
     }
 
+    public Narocilo getNarociloByMizaId(Long mizaId) {
+        return narociloRepository.findByMizaId(mizaId);
+    }
     public Long dobiZadnjeNarociloByMiza(Long idMiza){
         return narociloRepository.dobiZadnjeNarociloByMiza(idMiza);
     }

@@ -5,6 +5,8 @@ import com.example.demo.models.Izdelek;
 import com.example.demo.models.Rezervacija;
 import com.example.demo.models.TIP_IZDELKA;
 import com.example.demo.services.RezervacijaService;
+
+import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

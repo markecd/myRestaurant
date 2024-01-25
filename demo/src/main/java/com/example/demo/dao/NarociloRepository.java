@@ -37,6 +37,9 @@ public interface NarociloRepository extends CrudRepository<Narocilo, Long> {
     @Query("SELECT m.stanje_mize, m.stevilka_mize FROM Narocilo n JOIN n.miza m WHERE n.stanje_narocila = POSTREZENO")
     List<STANJE_MIZE> najdiStanjeMizeNaStanjeNarocila();
 
+    @Query("SELECT n FROM Narocilo n WHERE n.miza.id = :mizaId")
+    Narocilo findByMizaId(@Param("mizaId") Long mizaId);
+
     @Query(value = "SELECT n.id " +
             "FROM narocilo n " +
             "WHERE n.id_miza = :mizaId " +
