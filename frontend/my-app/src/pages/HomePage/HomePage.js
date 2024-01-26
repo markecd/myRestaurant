@@ -27,22 +27,41 @@ function HomePage() {
         );
     }
 
-    if (pozicija == "NATAKAR" || pozicija == "RECEPTOR"){
+    if (pozicija == "NATAKAR") {
         return(
             <>
-                <Header></Header>
+                <Header />
                 <div className='mize-container'>
-                <div className='row'>
-                    {mize.map((mizaData, index) => (
-                        <div key={index} className='col-lg-3'>
-                            <Miza data={mizaData} /> {}
-                        </div>
-                    ))}
+                    <div className='row'>
+                        {mize.map((mizaData, index) => (
+                            <div key={index} className='col-lg-3'>
+                                <Miza data={mizaData} />
+                            </div>
+                        ))}
+                    </div>
                 </div>
+            </>
+        )
+    }
+
+    if (pozicija == "RECEPTOR") {
+        return(
+            <>
+                <Header />
+                <Rezervacija />
+                <div className='mize-container'>
+                    <div className='row'>
+                        {mize.map((mizaData, index) => (
+                            <div key={index} className='col-lg-3'>
+                                <Miza data={mizaData} />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </>
         )
     }
 }
+
 
 export default HomePage;

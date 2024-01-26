@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dao.IzdelekRepository;
 import com.example.demo.dao.NarociloRepository;
 import com.example.demo.dao.NatakarRepository;
 import com.example.demo.dao.RacunRepository;
@@ -29,7 +30,13 @@ public class RacunService {
     private NarociloRepository narociloRepository;
 
     @Autowired
+    private IzdelekRepository izdelekRepository;
+
+    @Autowired
     private NatakarRepository natakarRepository;
+
+    @Autowired
+    private PdfService pdfService;
 
     public Racun vstaviRacun(RacunDTO racunDTO){
         Racun racun = new Racun();
@@ -54,6 +61,11 @@ public class RacunService {
         racun.setKoncen_znesek(narociloRepository.VrniSkupnoCenoNarocila(racunDTO.getNarociloId()));
 
         narociloRepository.save(narociloZaVstaviti);
+
+        Iterable<Object[]> izdelkiInKolicina = izdelekRepository.vrniIzdelkeNarocila(narociloZaVstaviti.getId());
+
+        pdfService.generatePdf(natakarZaVstaviti, izdelkiInKolicina, racun.getKoncen_znesek());
+        
         return racunRepository.save(racun);
     }
 
