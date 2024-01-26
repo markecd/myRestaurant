@@ -44,4 +44,7 @@ public interface NarociloRepository extends CrudRepository<Narocilo, Long> {
             "LIMIT 1", nativeQuery = true)
     Long dobiZadnjeNarociloByMiza(@Param("mizaId") Long mizaId);
 
+    @Query("SELECT n FROM Narocilo n WHERE n.stanje_narocila IN ('PREJETO', 'V_PRIPRAVI', PRIPRAVLJENO)")
+    List<Narocilo> vrniNarocilaKuhar();
+
 }

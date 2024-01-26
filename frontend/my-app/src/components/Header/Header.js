@@ -8,6 +8,7 @@ function Header() {
   const history = useHistory();
 
   const handleLogout = () => {
+    sessionStorage.removeItem('pozicija');
     history.push('/');
   };
 

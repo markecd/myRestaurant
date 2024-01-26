@@ -17,7 +17,7 @@ function HomePage() {
 
     const pozicija = sessionStorage.getItem('pozicija');
 
-    if (pozicija !== "NATAKAR") {
+    if (pozicija == "KUHAR") {
         return (
             <>
                 <Header />
@@ -26,20 +26,22 @@ function HomePage() {
         );
     }
 
-    return(
-        <>
-            <Header></Header>
-            <div className='mize-container'>
-            <div className='row'>
-                {mize.map((mizaData, index) => (
-                    <div key={index} className='col-lg-3'>
-                        <Miza data={mizaData} /> {}
-                    </div>
-                ))}
-            </div>
-            </div>
-        </>
-    )
+    if (pozicija == "NATAKAR"){
+        return(
+            <>
+                <Header></Header>
+                <div className='mize-container'>
+                <div className='row'>
+                    {mize.map((mizaData, index) => (
+                        <div key={index} className='col-lg-3'>
+                            <Miza data={mizaData} /> {}
+                        </div>
+                    ))}
+                </div>
+                </div>
+            </>
+        )
+    }
 }
 
 export default HomePage;

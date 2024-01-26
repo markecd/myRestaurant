@@ -53,4 +53,8 @@ public class IzdelekController {
         return izdelekService.vrniIzdelkeOrdByTip();
     }
 
+    @GetMapping("/vrniIzdelkeNarocila/{narociloId}")
+    public Iterable<Object[]> vrniIzdelkeNarocila(@PathVariable(name="narociloId") Long narociloId){
+        return izdelekService.vrniIzdelkeNarocila(narociloId);
+    }
 }

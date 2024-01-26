@@ -1,35 +1,96 @@
 import './Kanban.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NarociloKuhar from '../../components/NarociloKuhar/NarociloKuhar';
 
-const initialIzdelki = {
-  prejeto: [{ id: 1, name: 'NarociloKuhar 1' }, { id: 2, name: 'NarociloKuhar 2' }],
-  vPripravi: [],
-  pripravljeno: [],
-};
-
 const KanbanBoard = () => {
-  const [narocilaKuhar, setNarocilaKuhar] = useState(initialIzdelki);
+  const [narocilaKuhar, setNarocilaKuhar] = useState({
+    prejeto: [],
+    vPripravi: [],
+    pripravljeno: [],
+  });
 
-  const moveForward = (movedIzdelek) => {
-    setNarocilaKuhar((prevIzdelki) => {
-      const novaNarocila = { ...prevIzdelki };
+  useEffect(() => {
+    const fetchNarocila = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/api/v1/narocila/vrniNarocilaKuhar");
+        const narocila = await response.json();
 
-      if (novaNarocila.prejeto.includes(movedIzdelek)) {
-        novaNarocila.prejeto = novaNarocila.prejeto.filter(
-          (izdelek) => izdelek.id !== movedIzdelek.id
-        );
-        novaNarocila.vPripravi.push(movedIzdelek);
-      } else if (novaNarocila.vPripravi.includes(movedIzdelek)) {
-        novaNarocila.vPripravi = novaNarocila.vPripravi.filter(
-          (izdelek) => izdelek.id !== movedIzdelek.id
-        );
-        novaNarocila.pripravljeno.push(movedIzdelek);
+        let kategorije = {
+          prejeto: [],
+          vPripravi: [],
+          pripravljeno: [],
+        };
+
+        for (const trenutnoNarocilo of narocila) {
+          const response = await fetch(`http://localhost:8080/api/v1/izdelki/vrniIzdelkeNarocila/${trenutnoNarocilo.id}`);
+          const izdelki = await response.json();
+
+          const narocilo = {
+            id: trenutnoNarocilo.id,
+            stanje: trenutnoNarocilo.stanje_narocila,
+            izdelki: izdelki,
+          };
+
+          if (trenutnoNarocilo.stanje_narocila == 'PREJETO') {
+            kategorije.prejeto.push(narocilo);
+          } else if (trenutnoNarocilo.stanje_narocila == 'V_PRIPRAVI') {
+            kategorije.vPripravi.push(narocilo);
+          } else {
+            kategorije.pripravljeno.push(narocilo);
+          }
+
+        }
+
+        setNarocilaKuhar(kategorije);
+      } catch (error) {
+        console.error('Error fetching narocila:', error);
+      }
+    };
+
+    fetchNarocila();
+  }, []);
+
+  const moveForward = async (movedNarocilo) => {
+    let stanje;
+    if (movedNarocilo.stanje === 'PREJETO') {
+      stanje = 'V_PRIPRAVI';
+    } else{
+      stanje = 'PRIPRAVLJENO';
+    }
+    const response1 = await fetch(`http://localhost:8080/api/v1/narocila/spremeniStanje/${stanje}/${movedNarocilo.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    await response1.json();
+    setNarocilaKuhar(prevNarocila => {
+      let updatedPrejeto = [...prevNarocila.prejeto];
+      let updatedVPripravi = [...prevNarocila.vPripravi];
+      let updatedPripravljeno = [...prevNarocila.pripravljeno];
+
+      if (movedNarocilo.stanje === 'PREJETO') {
+        updatedPrejeto = updatedPrejeto.filter(narocilo => narocilo.id !== movedNarocilo.id);
+        movedNarocilo.stanje = 'V_PRIPRAVI';
+        updatedVPripravi.push(movedNarocilo);
+      } else if (movedNarocilo.stanje === 'V_PRIPRAVI') {
+        updatedVPripravi = updatedVPripravi.filter(narocilo => narocilo.id !== movedNarocilo.id);
+        movedNarocilo.stanje = 'PRIPRAVLJENO';
+        updatedPripravljeno.push(movedNarocilo);
       }
 
-      return novaNarocila;
+      let kategor = {
+        prejeto: updatedPrejeto,
+        vPripravi: updatedVPripravi,
+        pripravljeno: updatedPripravljeno,
+      }
+
+      return kategor;
     });
   };
+
+
+
 
   return (
     <div className="kanban-board row">

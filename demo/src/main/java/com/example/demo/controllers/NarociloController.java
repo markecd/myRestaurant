@@ -55,4 +55,9 @@ public class NarociloController {
         return narociloService.dobiZadnjeNarociloByMiza(idMiza);
     }
 
+    @GetMapping("/vrniNarocilaKuhar")
+    public List<Narocilo> vrniNarocilaKuhar(){
+        return narociloService.vrniNarocilaKuhar();
+    }
+
 }

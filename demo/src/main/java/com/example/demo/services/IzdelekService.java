@@ -59,4 +59,8 @@ public class IzdelekService {
     public Iterable<Izdelek> vrniIzdelkeOrdByTip(){
         return izdelekRepository.vrniIzdelkeOrdByTip();
     }
+
+    public Iterable<Object[]> vrniIzdelkeNarocila(Long narociloId){
+        return izdelekRepository.vrniIzdelkeNarocila(narociloId);
+    }
 }

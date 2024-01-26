@@ -92,4 +92,8 @@ public class NarociloService {
         return narociloRepository.dobiZadnjeNarociloByMiza(idMiza);
     }
 
+    public List<Narocilo> vrniNarocilaKuhar(){
+        return narociloRepository.vrniNarocilaKuhar();
+    }
+
 }

@@ -12,6 +12,21 @@ function Miza({ data }) {
     history.push(`/narocilo/${data[0]}`);
   };
 
+  const handleRacunClick = async (id) => {
+    const novoStanje = stanjeMize === 'ZASEDENO_POSTREZENO' ? 'NEZASEDENO' : 'ZASEDENO_POSTREZENO';
+    setStanjeMize(novoStanje);
+
+    const response1 = await fetch(`http://localhost:8080/api/v1/mize/posodobiStanje/${id}/${novoStanje}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    const data1 = await response1.json();
+    console.log(data1);
+
+  }
+
   const handlePostregelClick = async (id) => {
     const novoStanje = stanjeMize === 'ZASEDENO_NEPOSTREZENO' ? 'ZASEDENO_POSTREZENO' : 'ZASEDENO_NEPOSTREZENO';
     setStanjeMize(novoStanje);
@@ -37,7 +52,7 @@ function Miza({ data }) {
     });
     const data3 = await response3.json();
     console.log(data3);
-    
+
   }
 
   let mizaBorder = data[4] === 'PRIPRAVLJENO' ? {
@@ -78,7 +93,11 @@ function Miza({ data }) {
         <h3>Miza {data[2]}</h3>
         <h5 className={stanjeMizeClass}>{stanjeMizeNapis}</h5>
         <div className='col-lg-12'>
-          {stanjeMize === 'ZASEDENO_NEPOSTREZENO' ? (<div>
+          {stanjeMize === 'ZASEDENO_POSTREZENO' ? (
+            <Button variant="primary" type="submit" className="miza-button" onClick={() => handleRacunClick(data[0])}>
+              Račun
+            </Button>
+          ) : stanjeMize === 'ZASEDENO_NEPOSTREZENO' ? (<div>
             <Button
               variant="primary"
               type="button"
@@ -96,11 +115,7 @@ function Miza({ data }) {
               Postregel
             </Button>
           </div>
-          ) : (
-            <Button variant="primary" type="submit" className="miza-button">
-              Račun
-            </Button>
-          )}
+          ) : null}
         </div>
       </div>
     </div>

@@ -26,4 +26,7 @@ public interface IzdelekRepository extends CrudRepository<Izdelek, Long>{
 
     @Query("SELECT i FROM Izdelek i ORDER BY i.tip_izdelka")
     Iterable<Izdelek> vrniIzdelkeOrdByTip();
+
+    @Query("SELECT i, SUM(izn.quantity), izn.narocilo.stanje_narocila FROM IzdelekNarocilo izn JOIN izn.izdelek i WHERE izn.narocilo.id = :narociloId GROUP BY i.id")
+    Iterable<Object[]> vrniIzdelkeNarocila(Long narociloId);
 }
