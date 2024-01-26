@@ -9,6 +9,7 @@ function Header() {
 
   const handleLogout = () => {
     sessionStorage.removeItem('pozicija');
+    sessionStorage.removeItem('id');
     history.push('/');
   };
 

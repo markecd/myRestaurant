@@ -37,6 +37,7 @@ function Login() {
         console.log("prijava uspesna", result) //TO DO
         if (result.uspesnaPrijava) {
           sessionStorage.setItem('pozicija', result.pozicija);
+          sessionStorage.setItem('id', result.id);
           setIsLoginSuccessful(true);
         }
       })

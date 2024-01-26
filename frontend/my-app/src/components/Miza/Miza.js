@@ -45,6 +45,21 @@ function Miza({ data }) {
     const data3 = await response3.json();
     console.log(data3);
 
+    const racun = {
+      narociloId: data2,
+      natakarId: sessionStorage.getItem('id')
+    }
+
+    const response4 = await fetch(`http://localhost:8080/api/v1/racuni/vstaviRacun`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(racun)
+    });
+    const data4 = await response4.json();
+    console.log(data4);
+
 
   }
 
