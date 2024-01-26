@@ -4,6 +4,8 @@ import com.example.demo.models.Miza;
 import com.example.demo.models.STANJE_MIZE;
 import com.example.demo.services.MizaService;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +30,7 @@ public class MizaController {
         return mizaService.vrniVseMize();
     }
 
+
     @PostMapping("/vstaviMizo")
     public Miza vstaviMizo(@RequestBody Miza miza){
         return mizaService.vstaviMizo(miza);
@@ -47,5 +50,16 @@ public class MizaController {
     public Miza posodobiStanjeMize(@PathVariable(name = "idMiza") Long idMiza, @PathVariable(name = "stanjeMiza") String stanjeMiza){
         return mizaService.posodobiStanjeMize(idMiza, stanjeMiza);
     }
+
+    @GetMapping("/prosteMize")
+    public List<Miza> vrniProsteMize() {
+        return mizaService.vrniProsteMize();
+    }
+
+    @GetMapping("/zasedeneNepostrezeneMize")
+    public List<Miza> vrniZasedeneNepostrezeneMize() {
+        return mizaService.vrniZasedeneNepostrezeneMize();
+    }
+
 
 }

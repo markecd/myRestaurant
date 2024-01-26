@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,5 +71,13 @@ public class MizaService {
         } else {
             throw new IllegalArgumentException("Miza z ID " + id + " ne obstaja.");
         }
+    }
+
+    public List<Miza> vrniProsteMize() {
+        return mizaRepository.vrniProsteMize();
+    }
+
+    public List<Miza> vrniZasedeneNepostrezeneMize() {
+        return mizaRepository.vrniZasedeneNepostrezeneMize();
     }
 }

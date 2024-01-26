@@ -4,6 +4,7 @@ import KanbanBoard from '../../components/Kanban/Kanban';
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import './HomePage.css';
+import Rezervacija from '../../components/Rezervacija/Rezervacija';
 
 function HomePage() {
     const [mize, setMize] = useState([]);
@@ -17,7 +18,7 @@ function HomePage() {
 
     const pozicija = sessionStorage.getItem('pozicija');
 
-    if (pozicija !== "NATAKAR") {
+    if (pozicija === "KUHAR") {
         return (
             <>
                 <Header />
@@ -26,9 +27,11 @@ function HomePage() {
         );
     }
 
+
     return(
         <>
             <Header></Header>
+            {pozicija === 'RECEPTOR' && <Rezervacija />}
             <div className='mize-container'>
             <div className='row'>
                 {mize.map((mizaData, index) => (
