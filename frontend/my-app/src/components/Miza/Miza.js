@@ -32,6 +32,20 @@ function Miza({ data }) {
     const data1 = await response1.json();
     console.log(data1);
 
+    const response2 = await fetch(`http://localhost:8080/api/v1/narocila/dobiZadnjeNarociloByMiza/${id}`);
+    const data2 = await response2.json();
+    console.log(data2);
+
+    const response3 = await fetch(`http://localhost:8080/api/v1/narocila/spremeniStanje/PLACANO/${data2}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    const data3 = await response3.json();
+    console.log(data3);
+
+
   }
 
   const handleShowModal = () => setShowModal(true);
