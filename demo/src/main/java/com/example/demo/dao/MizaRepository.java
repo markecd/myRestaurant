@@ -15,6 +15,12 @@ public interface MizaRepository extends CrudRepository<Miza, Long> {
     @Query("SELECT m from Miza m WHERE m.stanje_mize = 'NEZASEDENO' AND m.stevilo_sedezev >= ?1 ORDER BY m.stevilo_sedezev DESC")
     List<Miza> vrniProsteMizePoSteviluSedezev(int stevilo_sedezev);
 
+    @Query("SELECT m from Miza m WHERE m.stanje_mize = 'NEZASEDENO'")
+    List<Miza> vrniProsteMize();
+
+    @Query("SELECT m from Miza m WHERE m.stanje_mize = 'ZASEDENO_NEPOSTREZENO'")
+    List<Miza> vrniZasedeneNepostrezeneMize();
+
     @Query("SELECT m FROM Miza m WHERE m.stanje_mize = :stanjeMize AND m.stevilka_mize = :stMize AND m.stevilo_sedezev = :stSedezev")
     List<Miza> vrniSpecificnoMizo(
             @Param("stanjeMize") STANJE_MIZE stanjeMize, 

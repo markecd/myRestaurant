@@ -60,4 +60,12 @@ public class RacunService {
     public Iterable<Racun> vrniRacunePogoji(double koncen_znesek, int miza_id, LocalDateTime cas_rezervacije){
         return racunRepository.vrniRacunePogoji(koncen_znesek, miza_id, cas_rezervacije);
     }
+
+    public Object[] vrniPodatkeORacunu(Long idRacun) {
+        return racunRepository.vrniPodatkeORacunu(idRacun);
+    }
+
+    public double vrniZnesekRacunaZPogoji(String imeNatakarja) {
+        return racunRepository.vrniZnesekRacunaZPogoji(imeNatakarja);
+    }
 }

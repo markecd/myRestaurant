@@ -4,6 +4,7 @@ import KanbanBoard from '../../components/Kanban/Kanban';
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import './HomePage.css';
+import Rezervacija from '../../components/Rezervacija/Rezervacija';
 
 function HomePage() {
     const [mize, setMize] = useState([]);
@@ -26,7 +27,7 @@ function HomePage() {
         );
     }
 
-    if (pozicija == "NATAKAR"){
+    if (pozicija == "NATAKAR" || pozicija == "RECEPTOR"){
         return(
             <>
                 <Header></Header>

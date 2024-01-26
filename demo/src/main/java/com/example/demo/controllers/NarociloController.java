@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.demo.models.Izdelek;
 import com.example.demo.models.Narocilo;
 import com.example.demo.models.STANJE_MIZE;
 import com.example.demo.models.STANJE_NAROCILO;
+import com.example.demo.pdfgenerator.PdfGenerator;
 import com.example.demo.dto.NarociloDTO;
+import com.example.demo.services.IzdelekService;
 import com.example.demo.services.NarociloService;
 
 @RestController
@@ -48,6 +51,11 @@ public class NarociloController {
     @GetMapping("/najdiStanjeMizePostrezenegaNarocila")
     public List<STANJE_MIZE> najdiStanjeMizeNaStanjeNarocila() {
         return narociloService.najdiStanjeMizeNaStanjeNarocila();
+    }
+
+    @GetMapping("/narociloNaMizi/{mizaId}")
+    public Narocilo getNarociloByMizaId(@PathVariable Long mizaId) {
+        return narociloService.getNarociloByMizaId(mizaId);
     }
 
     @GetMapping("/dobiZadnjeNarociloByMiza/{idMiza}")

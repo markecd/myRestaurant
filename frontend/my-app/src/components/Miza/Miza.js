@@ -1,12 +1,19 @@
-// Miza.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Miza.css';
-import { Button } from 'react-bootstrap';
+import { Button, Modal, Dropdown, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 function Miza({ data }) {
   const [stanjeMize, setStanjeMize] = useState(data[1]);
+  const [showModal, setShowModal] = useState(false);
+  const [novoStanje, setNovoStanje] = useState('');
   const history = useHistory();
+
+  useEffect(() => {
+    if (stanjeMize !== data[1]) {
+      setStanjeMize(data[1]);
+    }
+  }, [data[1]]);
 
   const handleNarociloClick = () => {
     history.push(`/narocilo/${data[0]}`);
@@ -26,6 +33,25 @@ function Miza({ data }) {
     console.log(data1);
 
   }
+
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setNovoStanje('');
+  };
+
+  const handleStanjeChange = async (id) => {
+    const response = await fetch(`http://localhost:8080/api/v1/mize/posodobiStanje/${id}/${novoStanje}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+    setStanjeMize(novoStanje);
+    handleCloseModal();
+  };
 
   const handlePostregelClick = async (id) => {
     const novoStanje = stanjeMize === 'ZASEDENO_NEPOSTREZENO' ? 'ZASEDENO_POSTREZENO' : 'ZASEDENO_NEPOSTREZENO';
@@ -87,17 +113,19 @@ function Miza({ data }) {
       break;
   }
 
+  const pozicija = sessionStorage.getItem('pozicija');
+
   return (
     <div className="miza-container" style={mizaBorder}>
       <div className='row'>
         <h3>Miza {data[2]}</h3>
         <h5 className={stanjeMizeClass}>{stanjeMizeNapis}</h5>
         <div className='col-lg-12'>
-          {stanjeMize === 'ZASEDENO_POSTREZENO' ? (
+          {stanjeMize === 'ZASEDENO_POSTREZENO' && pozicija !== 'RECEPTOR' ? (
             <Button variant="primary" type="submit" className="miza-button" onClick={() => handleRacunClick(data[0])}>
               Račun
             </Button>
-          ) : stanjeMize === 'ZASEDENO_NEPOSTREZENO' ? (<div>
+          ) : stanjeMize === 'ZASEDENO_NEPOSTREZENO' && pozicija !== 'RECEPTOR' ? (<div>
             <Button
               variant="primary"
               type="button"
@@ -115,9 +143,45 @@ function Miza({ data }) {
               Postregel
             </Button>
           </div>
-          ) : null}
+          ) : stanjeMize === 'NEZASEDENO' && pozicija !== 'RECEPTOR' ? null : (
+
+                <Button variant="primary" type="button" className="miza-button" onClick={handleShowModal}>
+                  Stanje Mize
+                </Button>
+
+          )}
         </div>
       </div>
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Spremeni Stanje Mize</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="formStanjeMize">
+              <Form.Label>Izberi novo stanje:</Form.Label>
+              <Dropdown onSelect={(selectedKey) => setNovoStanje(selectedKey)}>
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                  {novoStanje || 'Izberi stanje'}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item eventKey="NEZASEDENO">NEZASEDENO</Dropdown.Item>
+                  <Dropdown.Item eventKey="ZASEDENO_NEPOSTREZENO">NEPOSTREŽENO</Dropdown.Item>
+
+                </Dropdown.Menu>
+              </Dropdown>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Prekliči
+          </Button>
+          <Button variant="success" onClick={() => handleStanjeChange(data[0])}>
+            Spremeni
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

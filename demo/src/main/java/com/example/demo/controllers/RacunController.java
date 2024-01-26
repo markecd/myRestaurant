@@ -42,4 +42,14 @@ public class RacunController {
         }
         return racunService.vrniRacunePogoji(koncen_znesek, id_miza, cas_narocila);
     }
+
+    @GetMapping("/vrniPodatkeORacunu/{idRacun}")
+    public Object[] vrniPodatkeORacunu(@PathVariable Long idRacun) {
+        return racunService.vrniPodatkeORacunu(idRacun);
+    }
+
+    @GetMapping("/vrniZnesekRacunaZPogoji/{imeNatakarja}")
+    public double vrniZnesekRacunaZPogoji(@PathVariable String imeNatakarja) {
+        return racunService.vrniZnesekRacunaZPogoji(imeNatakarja);
+    }
 }

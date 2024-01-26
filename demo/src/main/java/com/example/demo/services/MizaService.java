@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,25 @@ public class MizaService {
         } else {
             throw new IllegalArgumentException("Miza z ID " + idMiza + " ne obstaja.");
         }
+    }
+
+    public Miza posodobiMizo(Long id, Miza novaMiza) {
+        Optional<Miza> mizaOptional = mizaRepository.findById(id);
+
+        if (mizaOptional.isPresent()) {
+            Miza mizaZaUpdate = mizaOptional.get();
+            mizaZaUpdate.setStevilo_sedezev(novaMiza.getStevilo_sedezev());
+            return mizaRepository.save(mizaZaUpdate);
+        } else {
+            throw new IllegalArgumentException("Miza z ID " + id + " ne obstaja.");
+        }
+    }
+
+    public List<Miza> vrniProsteMize() {
+        return mizaRepository.vrniProsteMize();
+    }
+
+    public List<Miza> vrniZasedeneNepostrezeneMize() {
+        return mizaRepository.vrniZasedeneNepostrezeneMize();
     }
 }
