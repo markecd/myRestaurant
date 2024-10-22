@@ -23,7 +23,7 @@ import com.example.demo.models.TIP_IZDELKA;
 
 
 
-@SpringBootTest
+@SpringBootTest(classes = MyRestaurantApplication.class)
 @ActiveProfiles("test")
 public class IzdelekRepositoryTest {
 	
