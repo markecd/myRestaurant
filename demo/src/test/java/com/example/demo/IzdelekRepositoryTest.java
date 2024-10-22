@@ -146,9 +146,9 @@ public class IzdelekRepositoryTest {
 	    
 	    assertEquals(3, izdelkiList.size());
 	    
-	    assertEquals(TIP_IZDELKA.SLADICA, izdelkiList.get(0).getTip_izdelka()); 
-	    assertEquals(TIP_IZDELKA.GLAVNA_JED, izdelkiList.get(1).getTip_izdelka());  
-	    assertEquals(TIP_IZDELKA.PIJACA, izdelkiList.get(2).getTip_izdelka()); 
+	    assertEquals(TIP_IZDELKA.GLAVNA_JED, izdelkiList.get(0).getTip_izdelka()); 
+	    assertEquals(TIP_IZDELKA.PIJACA, izdelkiList.get(1).getTip_izdelka());  
+	    assertEquals(TIP_IZDELKA.SLADICA, izdelkiList.get(2).getTip_izdelka()); 
 		
 	}
 	
